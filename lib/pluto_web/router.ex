@@ -23,6 +23,9 @@ defmodule PlutoWeb.Router do
    scope "/api/v1", PlutoWeb do
      pipe_through :api
 
-     get "/chats", ChatController, :index
+     resources "/chats", ChatController
+     resources "/messages", MessageController
+     resources "/reports", ReportController
+     resources "/users", UserController
    end
 end
