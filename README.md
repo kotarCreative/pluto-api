@@ -1,5 +1,14 @@
 # Pluto
 
+## Installation
+
+### Dependancies
+  * [Elixir](https://elixir-lang.org/install.html)
+  * [Phoenix](https://hexdocs.pm/phoenix/installation.html#content)
+  * [Postgres](https://www.postgresql.org/download/)
+  * [Node.js](https://nodejs.org/en/)
+
+
 To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`
@@ -10,6 +19,10 @@ To start your Phoenix server:
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 Ready to run in production? Please [check our deployment guides](http://www.phoenixframework.org/docs/deployment).
+
+## Notes About deployment
+ * Tests can be run with `mix test`
+ * Api is located at `api/v1/*`
 
 ## Learn more
 
