@@ -14,6 +14,7 @@ defmodule PlutoWeb.UserView do
     %{id: user.id,
       name: user.name,
       email: user.email,
-      email_token: user.email_token}
+      email_token: user.email_token,
+      password: user.password}
   end
 end

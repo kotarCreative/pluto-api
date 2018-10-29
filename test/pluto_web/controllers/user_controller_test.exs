@@ -1,15 +1,15 @@
 defmodule PlutoWeb.UserControllerTest do
   use PlutoWeb.ConnCase
 
-  alias Pluto.Core
-  alias Pluto.Core.User
+  alias Pluto.Auth
+  alias Pluto.Auth.User
 
-  @create_attrs %{email: "some email", email_token: "some email_token", name: "some name"}
-  @update_attrs %{email: "some updated email", email_token: "some updated email_token", name: "some updated name"}
-  @invalid_attrs %{email: nil, email_token: nil, name: nil}
+  @create_attrs %{email: "someemail@pluto.com", email_token: "some email_token", name: "some name", password: "some password"}
+  @update_attrs %{email: "someupdatedemail@pluto.com", email_token: "some updated email_token", name: "some updated name", password: "some updated password"}
+  @invalid_attrs %{email: nil, email_token: nil, name: nil, password: nil}
 
   def fixture(:user) do
-    {:ok, user} = Core.create_user(@create_attrs)
+    {:ok, user} = Auth.create_user(@create_attrs)
     user
   end
 
@@ -32,9 +32,10 @@ defmodule PlutoWeb.UserControllerTest do
       conn = get conn, user_path(conn, :show, id)
       assert json_response(conn, 200)["data"] == %{
         "id" => id,
-        "email" => "some email",
+        "email" => "someemail@pluto.com",
         "email_token" => "some email_token",
-        "name" => "some name"}
+        "name" => "some name",
+        "password" => "some password"}
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
@@ -53,9 +54,10 @@ defmodule PlutoWeb.UserControllerTest do
       conn = get conn, user_path(conn, :show, id)
       assert json_response(conn, 200)["data"] == %{
         "id" => id,
-        "email" => "some updated email",
+        "email" => "someupdatedemail@pluto.com",
         "email_token" => "some updated email_token",
-        "name" => "some updated name"}
+        "name" => "some updated name",
+        "password" => "some updated password"}
     end
 
     test "renders errors when data is invalid", %{conn: conn, user: user} do

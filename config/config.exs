@@ -25,3 +25,8 @@ config :logger, :console,
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
+
+# Configures Guardian
+config :pluto, Pluto.Auth.Guardian,
+       issuer: "pluto",
+       secret_key: "RhfZvrHX77JJH5GVpRq7gsAlp5F0AIM9X4/kJzjJ3M2hA7L3Xzsb6BSkyiSNw+0q"

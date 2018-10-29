@@ -1,4 +1,4 @@
-defmodule Pluto.Core.User do
+defmodule Pluto.Auth.User do
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -9,9 +9,10 @@ defmodule Pluto.Core.User do
     field :name, :string
     field :password, :string
     many_to_many :chats, Pluto.Core.Chat, join_through: "chats_users"
-
     timestamps()
   end
+
+  alias Comeonin.Bcrypt
 
   @doc false
   def changeset(user, attrs) do
@@ -20,16 +21,13 @@ defmodule Pluto.Core.User do
     |> validate_required([:name, :email, :email_token, :password])
     |> validate_length(:password, min: 5)
     |> unique_constraint(:name)
+    |> validate_format(:email, ~r/@/)
     |> put_password_hash()
   end
 
-  defp put_password_hash(changeset) do
-    case changeset do
-      %Ecto.Changeset{valid?: true, changes: %{password: pass}} ->
-        put_change(changeset, :password, Comeonin.Bcrypt.hashpwsalt(pass))
-
-      _ ->
-        changeset
-    end
+  defp put_password_hash(%Ecto.Changeset{valid?: true, changes: %{password: password}} = changeset) do
+    change(changeset, password: Bcrypt.hashpwsalt(password))
   end
+
+  defp put_password_hash(changeset), do: changeset
 end
