@@ -1,10 +1,10 @@
 defmodule PlutoWeb.SessionController do
   use PlutoWeb, :controller
 
-  alias PlutoWeb.{UserManager, UserManager.User, UserManager.Guardian}
+  alias Pluto.{Auth, Auth.Guardian}
 
   def login(conn, %{"user" => %{"username" => username, "password" => password}}) do
-    UserManager.authenticate_user(username, password)
+    Auth.authenticate_user(username, password)
     |> login_reply(conn)
   end
 

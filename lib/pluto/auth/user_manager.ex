@@ -1,6 +1,6 @@
-defmodule Pluto.Auth do
+defmodule Pluto.UserManager do
   @moduledoc """
-  The Auth context.
+  The UserManager context.
   """
 
   import Ecto.Query, warn: false
@@ -100,25 +100,5 @@ defmodule Pluto.Auth do
   """
   def change_user(%User{} = user) do
     User.changeset(user, %{})
-  end
-
-  alias Comeonin.Bcrypt
-
-  @doc """
-  Returns a check if the user can be authenticated or not.
-  """
-  def authenticate_user(username, plain_text_password) do
-    query = from u in User, where: u.username == ^username
-    case Repo.one(query) do
-      nil ->
-        Bcrypt.dummy_checkpw()
-        {:error, :invalid_credentials}
-      user ->
-        if Bcrypt.checkpw(plain_text_password, user.password) do
-          {:ok, user}
-        else
-          {:error, :invalid_credentials}
-        end
-    end
   end
 end
