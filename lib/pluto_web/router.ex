@@ -13,6 +13,11 @@ defmodule PlutoWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :auth do
+    plug Pluto.UserManager.Pipeline
+    plug Guardian.Plug.EnsureAuthenticated
+  end
+
   # scope "/", PlutoWeb do
   #   pipe_through :browser # Use the default browser stack
   #
@@ -23,9 +28,16 @@ defmodule PlutoWeb.Router do
    scope "/api/v1", PlutoWeb do
      pipe_through :api
 
+     post "/login", SessionController, :login
+     post "/logout", SessionController, :logout
+   end
+
+   scope "/api/v1", PlutoWeb do
+     pipe_through [:api, :auth]
+
      resources "/chats", ChatController
      resources "/messages", MessageController
-     resources "/reports", ReportController
      resources "/users", UserController
+     resources "/reports", ReportController
    end
 end
