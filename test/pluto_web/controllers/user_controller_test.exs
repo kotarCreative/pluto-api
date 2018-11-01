@@ -34,8 +34,7 @@ defmodule PlutoWeb.UserControllerTest do
         "id" => id,
         "email" => "someemail@pluto.com",
         "email_token" => "some email_token",
-        "name" => "some name",
-        "password" => "some password"}
+        "name" => "some name"}
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
@@ -56,8 +55,7 @@ defmodule PlutoWeb.UserControllerTest do
         "id" => id,
         "email" => "someupdatedemail@pluto.com",
         "email_token" => "some updated email_token",
-        "name" => "some updated name",
-        "password" => "some updated password"}
+        "name" => "some updated name"}
     end
 
     test "renders errors when data is invalid", %{conn: conn, user: user} do

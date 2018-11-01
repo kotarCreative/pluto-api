@@ -15,6 +15,11 @@ defmodule PlutoWeb.UserView do
       name: user.name,
       email: user.email,
       email_token: user.email_token,
-      password: user.password}
+      is_active: user.is_active
+    }
+  end
+
+  def render("jwt.json", %{jwt: jwt}) do
+      %{jwt: jwt}
   end
 end

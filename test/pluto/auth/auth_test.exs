@@ -21,12 +21,12 @@ defmodule Pluto.AuthTest do
 
     test "list_users/0 returns all users" do
       user = user_fixture()
-      assert Auth.list_users() == [user]
+      assert Auth.list_users() == [%User{user | password: nil}]
     end
 
     test "get_user!/1 returns the user with given id" do
       user = user_fixture()
-      assert Auth.get_user!(user.id) == user
+      assert Auth.get_user!(user.id) == %User{user | password: nil}
     end
 
     test "create_user/1 with valid data creates a user" do
@@ -34,6 +34,7 @@ defmodule Pluto.AuthTest do
       assert user.email == "someemail@pluto.com"
       assert user.email_token == "some email_token"
       assert user.name == "some name"
+      assert Bcrypt.verify_pass("some password", user.password_hash)
     end
 
     test "create_user/1 with invalid data returns error changeset" do
@@ -47,13 +48,15 @@ defmodule Pluto.AuthTest do
       assert user.email == "someupdatedemail@pluto.com"
       assert user.email_token == "some updated email_token"
       assert user.name == "some updated name"
+      assert Bcrypt.verify_pass("some updated password", user.password_hash)
 
     end
 
     test "update_user/2 with invalid data returns error changeset" do
       user = user_fixture()
       assert {:error, %Ecto.Changeset{}} = Auth.update_user(user, @invalid_attrs)
-      assert user == Auth.get_user!(user.id)
+      assert %User{user | password: nil} == Auth.get_user!(user.id)
+      assert Bcrypt.verify_pass("some password", user.password_hash)
     end
 
     test "delete_user/1 deletes the user" do

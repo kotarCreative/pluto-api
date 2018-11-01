@@ -9,7 +9,7 @@ defmodule Pluto.Core.Chat do
     field :name, :string
     field :password, :string
     field :user_id, :id
-    many_to_many :users, Pluto.Core.User, join_through: "chats_users"
+    many_to_many :users, Pluto.Auth.User, join_through: "chats_users"
 
     timestamps()
   end

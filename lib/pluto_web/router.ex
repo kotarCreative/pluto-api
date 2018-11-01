@@ -14,8 +14,7 @@ defmodule PlutoWeb.Router do
   end
 
   pipeline :auth do
-    plug Pluto.UserManager.Pipeline
-    plug Guardian.Plug.EnsureAuthenticated
+    plug Pluto.Auth.Pipeline
   end
 
   # scope "/", PlutoWeb do
@@ -30,6 +29,7 @@ defmodule PlutoWeb.Router do
 
      post "/login", SessionController, :login
      post "/logout", SessionController, :logout
+     post "/sign_up", UserController, :create
    end
 
    scope "/api/v1", PlutoWeb do
