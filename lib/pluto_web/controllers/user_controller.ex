@@ -1,8 +1,8 @@
 defmodule PlutoWeb.UserController do
   use PlutoWeb, :controller
 
-  alias Pluto.UserManager
   alias Pluto.Auth.User
+  alias Pluto.Auth.UserManager
   alias Pluto.Auth.Guardian
 
   action_fallback PlutoWeb.FallbackController

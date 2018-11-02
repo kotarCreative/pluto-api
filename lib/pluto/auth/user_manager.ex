@@ -1,4 +1,4 @@
-defmodule Pluto.UserManager do
+defmodule Pluto.Auth.UserManager do
   @moduledoc """
   The UserManager context.
   """

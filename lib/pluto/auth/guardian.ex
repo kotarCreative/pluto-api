@@ -1,7 +1,7 @@
 defmodule Pluto.Auth.Guardian do
   use Guardian, otp_app: :pluto
 
-  alias Pluto.UserManager
+  alias Pluto.Auth.UserManager
 
   def subject_for_token(user, _claims) do
     {:ok, to_string(user.id)}
