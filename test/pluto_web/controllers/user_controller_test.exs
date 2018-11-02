@@ -1,15 +1,33 @@
 defmodule PlutoWeb.UserControllerTest do
   use PlutoWeb.ConnCase
 
-  alias Pluto.Auth
   alias Pluto.Auth.User
+  alias Pluto.Auth.UserManager
 
-  @create_attrs %{email: "someemail@pluto.com", email_token: "some email_token", name: "some name", password: "some password"}
-  @update_attrs %{email: "someupdatedemail@pluto.com", email_token: "some updated email_token", name: "some updated name", password: "some updated password"}
-  @invalid_attrs %{email: nil, email_token: nil, name: nil, password: nil}
+  @create_attrs %{
+    email: "someemail@pluto.com",
+    email_token: "some email_token",
+    name: "some name",
+    password: "some password",
+    password_confirmation: "some password"
+  }
+  @update_attrs %{
+    email: "someupdatedemail@pluto.com",
+    email_token: "some updated email_token",
+    name: "some updated name",
+    password: "some updated password",
+    password_confirmation: "some password"
+  }
+  @invalid_attrs %{
+    email: nil,
+    email_token: nil,
+    name: nil,
+    password: nil,
+    password_confirmation: nil
+  }
 
   def fixture(:user) do
-    {:ok, user} = Auth.create_user(@create_attrs)
+    {:ok, user} = UserManager.create_user(@create_attrs)
     user
   end
 
