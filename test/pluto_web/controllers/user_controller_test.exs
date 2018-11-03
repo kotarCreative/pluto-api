@@ -27,9 +27,9 @@ defmodule PlutoWeb.UserControllerTest do
     password_confirmation: nil
   }
 
-  defp create_user(_) do
+  def fixture(:user) do
     {:ok, user} = UserManager.create_user(@create_attrs)
-    {:ok, user: user}
+    user
   end
 
   def authorize(conn, user) do
@@ -113,5 +113,10 @@ defmodule PlutoWeb.UserControllerTest do
         conn |> recycle |> authorize(user) |> get(user_path(conn, :show, user))
       end
     end
+  end
+
+  defp create_user(_) do
+    user = fixture(:user)
+    {:ok, user: user}
   end
 end
