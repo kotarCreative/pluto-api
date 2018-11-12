@@ -50,8 +50,7 @@ defmodule Pluto.Auth.UserManager do
 
   """
   def create_user(attrs \\ %{}) do
-    %User{}
-    |> User.changeset(attrs)
+    User.changeset(%User{}, attrs)
     |> Repo.insert()
   end
 
