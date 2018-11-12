@@ -7,7 +7,7 @@ defmodule PlutoWeb.SessionController do
   def login(conn, %{"username" => username, "password" => password}) do
     case Auth.token_sign_in(username, password) do
       {:ok, token, _claims} ->
-        conn |> render UserView, "jwt.json", jwt: token
+        conn |> render(UserView, "jwt.json", jwt: token)
       _ ->
         {:error, :unauthorized}
     end
