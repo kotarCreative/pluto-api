@@ -13,6 +13,7 @@ defmodule Pluto.Repo.Migrations.CreateUsers do
       timestamps()
     end
 
-    create(unique_index(:users, [:email, :hash, :name]))
+    create(unique_index(:users, [:email]))
+    create(unique_index(:users, [:hash]))
   end
 end
