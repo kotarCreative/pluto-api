@@ -3,6 +3,7 @@ defmodule Pluto.Repo.Migrations.CreateUsers do
 
   def change do
     create table(:users) do
+      add :hash, :string
       add :name, :string
       add :email, :string
       add :email_token, :string
@@ -12,6 +13,6 @@ defmodule Pluto.Repo.Migrations.CreateUsers do
       timestamps()
     end
 
-    create(unique_index(:users, [:email, :name]))
+    create(unique_index(:users, [:email, :hash, :name]))
   end
 end

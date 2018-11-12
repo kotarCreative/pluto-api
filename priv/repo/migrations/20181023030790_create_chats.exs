@@ -3,6 +3,7 @@ defmodule Pluto.Repo.Migrations.CreateChats do
 
   def change do
     create table(:chats) do
+      add :hash, :string
       add :name, :string
       add :password, :string
       add :is_private, :boolean, default: false, null: false
@@ -12,6 +13,6 @@ defmodule Pluto.Repo.Migrations.CreateChats do
       timestamps()
     end
 
-    create index(:chats, [:user_id])
+    create index(:chats, [:hash, :user_id])
   end
 end
