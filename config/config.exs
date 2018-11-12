@@ -11,8 +11,8 @@ config :pluto,
 
 # Configures the endpoint
 config :pluto, PlutoWeb.Endpoint,
-  url: [host: "localhost"],
-  secret_key_base: "gQzgiQEDt55dmkG3kPQf9wZPMWoI4xXOtwVon6EPyIyqYq3cBgX1/9RFy0cKik1J",
+  url: [host: System.get_env("APP_HOST")],
+  secret_key_base: System.get_env("APP_KEY"),
   render_errors: [view: PlutoWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: Pluto.PubSub,
            adapter: Phoenix.PubSub.PG2]
@@ -26,7 +26,18 @@ config :logger, :console,
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
 
+# Configures UeberAuth
+config :ueberauth, Ueberauth,
+  providers: [
+    facebook: { Ueberauth.Strategy.Facebook, [] },
+  ]
+
+# Configures Facebook UeberAuth
+config :ueberauth, Ueberauth.Strategy.Facebook.OAuth,
+  client_id: System.get_env("FACEBOOK_CLIENT_ID"),
+  client_secret: System.get_env("FACEBOOK_CLIENT_SECRET")
+
 # Configures Guardian
 config :pluto, Pluto.Auth.Guardian,
        issuer: "pluto",
-       secret_key: "RhfZvrHX77JJH5GVpRq7gsAlp5F0AIM9X4/kJzjJ3M2hA7L3Xzsb6BSkyiSNw+0q"
+       secret_key: System.get_env("GUARDIAN_SECRET_KEY")

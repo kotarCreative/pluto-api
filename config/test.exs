@@ -14,8 +14,8 @@ config :bcrypt_elixir, :log_rounds, 4
 # Configure your database
 config :pluto, Pluto.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
-  database: "pluto_test",
-  hostname: "localhost",
+  username: System.get_env("DB_USER_TEST"),
+  password: System.get_env("DB_PASSWORD_TEST"),
+  database: System.get_env("DB_NAME_TEST"),
+  hostname: System.get_env("DB_HOST_TEST"),
   pool: Ecto.Adapters.SQL.Sandbox

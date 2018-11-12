@@ -7,7 +7,7 @@ use Mix.Config
 # watchers to your application. For example, we use it
 # with brunch.io to recompile .js and .css sources.
 config :pluto, PlutoWeb.Endpoint,
-  http: [port: 4000],
+  http: [port: System.get_env("APP_PORT")],
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
@@ -51,8 +51,8 @@ config :phoenix, :stacktrace_depth, 20
 # Configure your database
 config :pluto, Pluto.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
-  database: "pluto_dev",
-  hostname: "localhost",
+  username: System.get_env("DB_USER"),
+  password: System.get_env("DB_PASSWORD"),
+  database: System.get_env("DB_NAME"),
+  hostname: System.get_env("DB_HOST"),
   pool_size: 10
