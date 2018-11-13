@@ -37,7 +37,7 @@ defmodule PlutoWeb.AuthController do
             "last_name" => last_name,
             "username" => auth.info.name
         }
-        render conn, "registration.html", user_data: user_data, callback_url: auth_path(conn, :register)
+        render conn, "registration.html", user_data: user_data, callback_url: auth_path(conn, :register), errors: nil
       user ->
         {:ok, token, _ignore} = Guardian.encode_and_sign(user)
         conn
