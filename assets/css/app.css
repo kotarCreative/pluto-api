@@ -1,1 +1,13 @@
 /* This file is for your main application css. */
+control-group {
+  margin: 5px auto;
+}
+
+.error-block {
+  color: #8200ff;
+  border: solid #8200ff;
+  background: #dabfee;
+  padding: 3px 10px;
+  border-radius: 5px;
+  margin: 5px 0;
+}

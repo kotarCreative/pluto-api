@@ -24,20 +24,29 @@ defmodule PlutoWeb.Router do
   # end
 
   # Other scopes may use custom stacks.
-   scope "/api/v1", PlutoWeb do
-     pipe_through :api
+  scope "/api/v1", PlutoWeb do
+    pipe_through :api
 
-     post "/login", SessionController, :login
-     post "/logout", SessionController, :logout
-     post "/sign_up", UserController, :create
-   end
+    post "/login", SessionController, :login
+    post "/logout", SessionController, :logout
+    post "/sign_up", UserController, :create
+  end
 
-   scope "/api/v1", PlutoWeb do
-     pipe_through [:api, :auth]
+  scope "/api/v1", PlutoWeb do
+    pipe_through [:api, :auth]
 
-     resources "/chats", ChatController
-     resources "/messages", MessageController
-     resources "/users", UserController
-     resources "/reports", ReportController
-   end
+    resources "/chats", ChatController
+    resources "/messages", MessageController
+    resources "/users", UserController
+    resources "/reports", ReportController
+  end
+
+  scope "/auth", PlutoWeb do
+    pipe_through [:browser]
+
+    get "/:provider", AuthController, :request
+    get "/:provider/callback", AuthController, :callback
+
+    post "/register", AuthController, :register
+  end
 end

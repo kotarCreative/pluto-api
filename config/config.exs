@@ -29,7 +29,10 @@ import_config "#{Mix.env}.exs"
 # Configures UeberAuth
 config :ueberauth, Ueberauth,
   providers: [
-    facebook: { Ueberauth.Strategy.Facebook, [] },
+    facebook: { Ueberauth.Strategy.Facebook, [
+      default_scope: "email,public_profile",
+      display: "popup"
+    ]},
   ]
 
 # Configures Facebook UeberAuth

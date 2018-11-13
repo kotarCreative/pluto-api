@@ -30,7 +30,7 @@ defmodule Pluto.Auth do
   end
 
   defp verify_password(password, %User{} = user) when is_binary(password) do
-    if checkpw(password, user.password_hash) do
+    if checkpw(password, user.password) do
       {:ok, user}
     else
       {:error, :invalid_password}

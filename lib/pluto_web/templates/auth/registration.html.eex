@@ -1,0 +1,46 @@
+<%= form_tag @callback_url, method: "post" do %>
+  <div class='control-group'>
+    <label class='control-label' for='email-input'>Email *</label>
+    <input class='form-control' type='email' name='email' value='<%= @user_data["email"] %>' required />
+
+    <%= if (@errors && @errors[:email]) do %>
+      <div class="error-block">Email is already in use</div>
+    <% end %>
+  </div>
+
+  <div class='control-group'>
+    <label class='control-label' for='first-name-input'>First Name</label>
+    <input class='form-control' type='text' name='first_name' value='<%= @user_data["first_name"] %>' />
+  </div>
+
+  <div class='control-group'>
+    <label class='control-label' for='last-name-input'>Last Name</label>
+    <input class='form-control' type='text' name='last_name' value='<%= @user_data["last_name"] %>' />
+  </div>
+
+  <div class='control-group'>
+    <label class='control-label' for='nickname-input'>Username *</label>
+    <input class='form-control' type='text' name='username' value='<%= @user_data["username"] %>' required />
+
+    <%= if (@errors && @errors[:username]) do %>
+      <div class="error-block">Username is already in use</div>
+    <% end %>
+  </div>
+
+  <div class='control-group'>
+    <label class='control-label' for='password-input'>Password *</label>
+    <input class='form-control' type='password' name='password' required />
+  </div>
+
+  <div class='control-group'>
+    <label class='control-label' for='password-confirmation-input'>Confirm Password *</label>
+    <input class='form-control' type='password' name='password_confirmation' required />
+    <%= if (@errors && @errors[:password_confirmation]) do %>
+      <div class="error-block">Passwords did not match</div>
+    <% end %>
+  </div>
+
+  <div class='control-group'>
+    <button class="btn btn-primary" id="create-account-btn">Create Account and Blast Off!</button>
+  </div>
+<% end %>
