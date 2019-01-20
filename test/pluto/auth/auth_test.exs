@@ -6,9 +6,32 @@ defmodule Pluto.AuthTest do
   describe "users" do
     alias Pluto.Auth.User
 
-    @valid_attrs %{email: "someemail@pluto.com", email_token: "some email_token", name: "some name", password: "some password", password_confirmation: "some password"}
-    @update_attrs %{email: "someupdatedemail@pluto.com", email_token: "some updated email_token", name: "some updated name", password: "some updated password", password_confirmation: "some updated password"}
-    @invalid_attrs %{email: nil, email_token: nil, name: nil, password: nil, password_confirmation: nil}
+    @valid_attrs %{
+      email: "someemail@pluto.com",
+      email_token: "some email_token",
+      username: "some name",
+      name: "some name",
+      password: "some password",
+      password_confirmation: "some password"
+    }
+
+    @update_attrs %{
+      email: "someupdatedemail@pluto.com",
+      email_token: "some updated email_token",
+      username: "some updated name",
+      name: "some updated name",
+      password: "some updated password",
+      password_confirmation: "some updated password"
+    }
+
+    @invalid_attrs %{
+      email: nil,
+      email_token: nil,
+      username: nil,
+      name: nil,
+      password: nil,
+      password_confirmation: nil
+    }
 
     def user_fixture(attrs \\ %{}) do
       {:ok, user} =

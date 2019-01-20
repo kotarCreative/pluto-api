@@ -2,7 +2,7 @@ defmodule PlutoWeb.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  # channel "room:*", PlutoWeb.RoomChannel
+  channel "chat:lobby", PlutoWeb.ChatChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
